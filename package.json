@@ -4,11 +4,18 @@
 	"productName": "BE TS Utils",
 	"description": "Minecraft Bedrock Typescript Utilities",
 	"private": "false",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"devDependencies": {
 		"eslint-plugin-minecraft-linting": "^2.0.2",
 		"typescript": "^5.0.2"
+	},
+	"scripts": {
+		"build": "tsc",
+		"prepare": "npm run build"
 	},
 	"dependencies": {
 		"@minecraft/math": "^2.4.0",
