@@ -1,39 +1,5 @@
 import { RawMessage, RawMessageScore } from "@minecraft/server";
 
-export enum ColorCode {
-	Black = "§0",
-	DarkBlue = "§1",
-	DarkGreen = "§2",
-	DarkAqua = "§3",
-	DarkRed = "§4",
-	DarkPurple = "§5",
-	Gold = "§6",
-	Gray = "§7",
-	DarkGray = "§8",
-	Blue = "§9",
-	Green = "§a",
-	Aqua = "§b",
-	Red = "§c",
-	LightPurple = "§d",
-	Yellow = "§e",
-	White = "§f",
-	MinecoinGold = "§g",
-	MaterialQuartz = "§h",
-	MaterialIron = "§i",
-	MaterialNetherite = "§j",
-	RandomSymbols = "§k",
-	Bold = "§l",
-	MaterialRedstone = "§m",
-	MaterialCopper = "§n",
-	Italic = "§o",
-	MaterialGold = "§p",
-	MaterialEmerald = "§q",
-	Reset = "§r",
-	MaterialDiamond = "§s",
-	MaterialLapis = "§t",
-	MaterialAmethyst = "§u",
-}
-
 /**
  * A builder for raw messages.
  */
