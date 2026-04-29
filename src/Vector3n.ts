@@ -238,13 +238,45 @@ export class Vector3n {
 			z: a.x * b.y - a.y * b.x,
 		};
 	}
-
+	/**
+	 * Returns a copy of the vector with its magnitude clamped to the minimum and maximum values.
+	 * @param v 
+	 * @param min 
+	 * @param max 
+	 * @returns 
+	 */
 	static clamp(v: Vector3, min: Vector3, max: Vector3): Vector3 {
 		return {
 			x: Mathn.clamp(v.x, min.x, max.x),
 			y: Mathn.clamp(v.y, min.y, max.y),
 			z: Mathn.clamp(v.z, min.z, max.z),
 		};
+	}
+	/**
+	 * Returns a copy of the vector with its magnitude clamped to the maximum length.
+	 * @param v 
+	 * @param maxLength 
+	 * @returns 
+	 */
+	static clampMagnitude(v: Vector3, maxLength: number): Vector3 {
+		const sqrMagnitude = Vector3n.sqrMagnitude(v);
+		const flag = sqrMagnitude > maxLength * maxLength;
+		if (flag)
+		{
+			const num = Math.sqrt(sqrMagnitude);
+			const num2 = v.x / num;
+			const num3 = v.y / num;
+			const num4 = v.z / num;
+			return {
+				x: num2 * maxLength,
+				y: num3 * maxLength,
+				z: num4 * maxLength,
+			};
+		}
+		else
+		{
+			return v;
+		}
 	}
 
 	static ceil(v: Vector3): Vector3 {
