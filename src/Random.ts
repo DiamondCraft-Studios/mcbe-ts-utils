@@ -1,17 +1,25 @@
 import { Vector2, Vector3 } from "@minecraft/server";
+import { ColorCode, ColorCodeSet } from "./Colors";
 
 /**
  * Common randomizer functions.
  */
 export class Random {
 	/**
-	 * Returns a random number between the given min and max.
+	 * Returns a pseudorandom number between 0 and 1.
+	 * @returns
+	 */
+	static value(): number {
+		return Math.random();
+	}
+	/**
+	 * Returns a random float between the given min and max.
 	 * @param minInclusive
 	 * @param maxExclusive
 	 * @returns
 	 */
-	static range(minInclusive: number, maxExclusive: number): number {
-		return Math.floor(Math.random() * (maxExclusive - minInclusive)) + minInclusive;
+	static range(minInclusive: number, maxInclusive: number): number {
+		return Math.random() * (maxInclusive - minInclusive) + minInclusive;
 	}
 	/**
 	 * Returns a random boolean.
@@ -21,13 +29,51 @@ export class Random {
 		return Math.random() < 0.5;
 	}
 	/**
+	 * Gets a random number sign.
+	 * @returns
+	 */
+	static sign(): number {
+		return Math.random() < 0.5 ? -1 : 1;
+	}
+	/**
+	 * Returns a boolean with a probability of the given value.
+	 * @param probability01
+	 * @returns
+	 */
+	static chance(probability01: number): boolean {
+		return Math.random() < probability01;
+	}
+	/**
 	 * Gets a random element from the given array.
 	 * @param array
 	 * @returns
 	 */
 	static fromArray<T>(array: T[]): T | undefined {
 		if (array.length === 0) return undefined;
-		return array[Math.floor(Math.random() * array.length)];
+		return array[Random.range(0, array.length)];
+	}
+	/**
+	 * Gets a random element from the given set.
+	 * @param set
+	 * @returns
+	 */
+	static fromSet<T>(set: Set<T>): T | undefined {
+		const size = set.size;
+		if (size === 0) return undefined;
+
+		const index = Random.range(0, size);
+
+		let i = 0;
+		for (const value of set) {
+			if (i++ === index) return value;
+		}
+	}
+	/**
+	 * Gets a random color code from the Bedrock available color codes.
+	 * @returns
+	 */
+	static colorCode(): string | undefined {
+		return Random.fromSet(ColorCodeSet);
 	}
 	/**
 	 * Gets a random point inside a unit circle.
@@ -35,7 +81,7 @@ export class Random {
 	 */
 	static insideUnitCircle(): Vector2 {
 		const angle = Math.random() * Math.PI * 2;
-		const radius = Math.sqrt(Math.random()); // important!
+		const radius = Math.sqrt(Math.random());
 
 		return {
 			x: Math.cos(angle) * radius,
@@ -44,7 +90,7 @@ export class Random {
 	}
 	/**
 	 * Gets a random point inside a unit sphere.
-	 * @returns 
+	 * @returns
 	 */
 	static insideUnitSphere(): Vector3 {
 		const u = Math.random();
@@ -65,7 +111,7 @@ export class Random {
 	}
 	/**
 	 * Gets a random point on the circumference of a unit circle.
-	 * @returns 
+	 * @returns
 	 */
 	static onUnitCircle(): Vector2 {
 		const angle = Math.random() * Math.PI * 2;
@@ -77,7 +123,7 @@ export class Random {
 	}
 	/**
 	 * Gets a random point on the surface of a unit sphere.
-	 * @returns 
+	 * @returns
 	 */
 	static onUnitSphere(): Vector3 {
 		const u = Math.random();
