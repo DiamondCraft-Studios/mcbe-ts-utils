@@ -9,7 +9,6 @@
 		"declarationMap": true,
 		"sourceMap": true,
 		"strict": true,
-		"removeComments": true,
 		"noImplicitAny": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
