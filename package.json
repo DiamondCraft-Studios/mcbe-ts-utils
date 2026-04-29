@@ -1,0 +1,19 @@
+{
+	"name": "@diamondcraft/be-ts-utils",
+	"version": "1.0.0",
+	"productName": "BE TS Utils",
+	"description": "Minecraft Bedrock Typescript Utilities",
+	"private": "false",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+	"devDependencies": {
+		"eslint-plugin-minecraft-linting": "^2.0.2",
+		"typescript": "^5.0.2"
+	},
+	"dependencies": {
+		"@minecraft/math": "^2.4.0",
+		"@minecraft/server": "^2.6.0",
+		"@minecraft/server-ui": "^2.0.0",
+		"@minecraft/vanilla-data": "^1.26.0"
+	}
+}

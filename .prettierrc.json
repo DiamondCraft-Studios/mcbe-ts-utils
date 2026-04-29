@@ -1,0 +1,27 @@
+{
+	"trailingComma": "es5",
+	"semi": true,
+	"objectWrap": "preserve",
+	"singleQuote": false,
+	"bracketSpacing": true,
+	"arrowParens": "always",
+	"printWidth": 120,
+	"endOfLine": "auto",
+	"bracketSameLine": false,
+	"overrides": [
+		{
+			"files": "*.json",
+			"options": {
+				"tabWidth": 2,
+				"useTabs": true
+			}
+		},
+		{
+			"files": ["*.ts", "*.js"],
+			"options": {
+				"tabWidth": 4,
+				"useTabs": true
+			}
+		}
+	]
+}
