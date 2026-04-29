@@ -186,30 +186,16 @@ export class Vector3n {
 	}
 
 	/**
-	 * Multiplies each component of the vector by the scalar value.
+	 * Multiplies two vectors component-wise.
 	 * @param v
 	 * @param s
 	 * @returns
 	 */
-	static scale(v: Vector3, s: number): Vector3 {
+	static multiplyVectors(a: Vector3, b: Vector3): Vector3 {
 		return {
-			x: v.x * s,
-			y: v.y * s,
-			z: v.z * s,
-		};
-	}
-
-	/**
-	 * Divides two vectors component-wise.
-	 * @param a
-	 * @param b
-	 * @returns
-	 */
-	static divide(a: Vector3, b: Vector3): Vector3 {
-		return {
-			x: a.x / b.x,
-			y: a.y / b.y,
-			z: a.z / b.z,
+			x: a.x * b.x,
+			y: a.y * b.y,
+			z: a.z * b.z,
 		};
 	}
 
@@ -219,11 +205,25 @@ export class Vector3n {
 	 * @param b
 	 * @returns
 	 */
-	static divideScalar(v: Vector3, s: number): Vector3 {
+	static divide(a: Vector3, s: number): Vector3 {
 		return {
-			x: v.x / s,
-			y: v.y / s,
-			z: v.z / s,
+			x: a.x / s,
+			y: a.y / s,
+			z: a.z / s,
+		};
+	}
+
+	/**
+	 * Divides two vectors component-wise.
+	 * @param a
+	 * @param b
+	 * @returns
+	 */
+	static divideVectors(a: Vector3, b: Vector3): Vector3 {
+		return {
+			x: a.x / b.x,
+			y: a.y / b.y,
+			z: a.z / b.z,
 		};
 	}
 
@@ -236,20 +236,6 @@ export class Vector3n {
 			x: a.y * b.z - a.z * b.y,
 			y: a.z * b.x - a.x * b.z,
 			z: a.x * b.y - a.y * b.x,
-		};
-	}
-
-	/**
-	 * Multiplies two vectors component-wise.
-	 * @param v
-	 * @param s
-	 * @returns
-	 */
-	static hadamard(a: Vector3, b: Vector3): Vector3 {
-		return {
-			x: a.x * b.x,
-			y: a.y * b.y,
-			z: a.z * b.z,
 		};
 	}
 
