@@ -1,4 +1,4 @@
-import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player } from "@minecraft/server";
+import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player, Vector3 } from "@minecraft/server";
 
 /**
  * Player utility functions.
@@ -7,15 +7,19 @@ export class PlayerUtils {
 	static isInSurvivalMode(player: Player): boolean {
 		return player.getGameMode() === GameMode.Survival;
 	}
+
 	static isInAdventureMode(player: Player): boolean {
 		return player.getGameMode() === GameMode.Adventure;
 	}
+
 	static isInCreativeMode(player: Player): boolean {
 		return player.getGameMode() === GameMode.Creative;
 	}
+
 	static isInSpectatorMode(player: Player): boolean {
 		return player.getGameMode() === GameMode.Spectator;
 	}
+
 	/**
 	 * Gets the item in the main hand of the player.
 	 * @param player
@@ -24,6 +28,7 @@ export class PlayerUtils {
 	static getItemMainhand(player: Player): ItemStack | undefined {
 		return player.getComponent(EntityComponentTypes.Equippable)?.getEquipment(EquipmentSlot.Mainhand);
 	}
+
 	/**
 	 * Sets the item in the main hand of the player.
 	 * @param itemStack
@@ -32,6 +37,7 @@ export class PlayerUtils {
 	static setItemMainhand(itemStack: ItemStack, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Mainhand, itemStack);
 	}
+
 	/**
 	 * Gets the item in the off hand of the player.
 	 * @param player
@@ -40,6 +46,7 @@ export class PlayerUtils {
 	static getItemOffhand(player: Player): ItemStack | undefined {
 		return player.getComponent(EntityComponentTypes.Equippable)?.getEquipment(EquipmentSlot.Offhand);
 	}
+
 	/**
 	 * Sets the item in the off hand of the player.
 	 * @param itemStack
@@ -48,6 +55,7 @@ export class PlayerUtils {
 	static setItemOffhand(itemStack: ItemStack, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Offhand, itemStack);
 	}
+	
 	/**
 	 * Gets the entity the player is riding on if it matches the given typeId.
 	 * @param typeId The rideable entity to check.
@@ -55,5 +63,29 @@ export class PlayerUtils {
 	 */
 	static getRiddenEntity(player: Player): Entity | undefined {
 		return player.getComponent(EntityComponentTypes.Riding)?.entityRidingOn;
+	}
+	
+	/**
+	 * Checks if the player is within the given area box.
+	 * @param player
+	 * @param corner1
+	 * @param corner2
+	 * @returns
+	 */
+	static isWithinAreaBox(player: Player, corner1: Vector3, corner2: Vector3): boolean {
+		if (!player) return false;
+
+		const { x, y, z } = player.location;
+
+		const minX = Math.min(corner1.x, corner2.x);
+		const maxX = Math.max(corner1.x, corner2.x);
+
+		const minY = Math.min(corner1.y, corner2.y);
+		const maxY = Math.max(corner1.y, corner2.y);
+
+		const minZ = Math.min(corner1.z, corner2.z);
+		const maxZ = Math.max(corner1.z, corner2.z);
+
+		return x >= minX && x <= maxX && y >= minY && y <= maxY && z >= minZ && z <= maxZ;
 	}
 }
