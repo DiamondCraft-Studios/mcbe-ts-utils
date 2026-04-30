@@ -39,6 +39,17 @@ export class EntityUtils {
 		return entity.getProperty(property) === value;
 	}
 	/**
+	 * Checks if the entity is included in the given family.
+	 * @param entity 
+	 * @param families 
+	 * @returns 
+	 */
+	static isTypeFamily(entity: Entity, families: string[]): boolean {
+		const typeFamily = entity.getComponent(EntityComponentTypes.TypeFamily);
+		if (!typeFamily) return false;
+		return typeFamily.getTypeFamilies().some((family) => families.includes(family));
+	}
+	/**
 	 * Check if the entity is tamed to the player.
 	 * Must have "minecraft:is_tamed" component.
 	 * @param player The owner to check.
