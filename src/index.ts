@@ -11,4 +11,5 @@ export * from "./PlayerUtils";
 export * from "./Random";
 export * from "./SystemUtils";
 export * from "./TextUtils";
+export * from "./TickTime";
 export * from "./Vector3n";
