@@ -1,4 +1,5 @@
 import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player, Vector3 } from "@minecraft/server";
+import { Mathn } from "./Mathn";
 
 /**
  * Player utility functions.
@@ -54,6 +55,19 @@ export class PlayerUtils {
 	 */
 	static setItemOffhand(itemStack: ItemStack, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Offhand, itemStack);
+	}
+
+	/**
+	 * Sets the health of the player.
+	 * @param amount
+	 * @param player 
+	 */
+	static setHealth(player: Player, amount: number) {
+		const health = player.getComponent(EntityComponentTypes.Health);
+		if (health) {
+			amount = Mathn.clamp(amount, 0, health.effectiveMax);
+			health.setCurrentValue(amount);
+		}
 	}
 	
 	/**
