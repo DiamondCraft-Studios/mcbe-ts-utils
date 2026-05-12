@@ -4,6 +4,12 @@ import { TicksPerSecond } from "@minecraft/server";
  * Tick conversion utilities.
  */
 export class TickTime {
+	public static readonly ONE_TICK = 1;
+	public static readonly ONE_SECOND = TicksPerSecond;
+	public static readonly ONE_MILLISECOND = TicksPerSecond / 1000;
+	public static readonly ONE_MINUTE = TicksPerSecond * 60;
+	public static readonly ONE_HOUR = TicksPerSecond * 60 * 60;
+	
 	/**
 	 * Get ticks from given seconds.
 	 * @param seconds 
