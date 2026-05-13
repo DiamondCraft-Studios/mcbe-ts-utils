@@ -7,6 +7,7 @@ export * from "./Ease";
 export * from "./EntityUtils";
 export * from "./ItemStackUtils";
 export * from "./Mathn";
+export * from "./MapUtils";
 export * from "./PlayerUtils";
 export * from "./Random";
 export * from "./SystemUtils";
