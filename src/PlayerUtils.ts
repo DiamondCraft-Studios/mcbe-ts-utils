@@ -1,4 +1,4 @@
-import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player, Vector3 } from "@minecraft/server";
+import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player, Vector3, world } from "@minecraft/server";
 import { Mathn } from "./Mathn";
 
 /**
@@ -19,6 +19,20 @@ export class PlayerUtils {
 
 	static isInSpectatorMode(player: Player): boolean {
 		return player.getGameMode() === GameMode.Spectator;
+	}
+
+	/**
+	 * Gets a player by their name.
+	 * @param name 
+	 * @returns 
+	 */
+	static getByName(name: string): Player | undefined {
+		for (const player of world.getPlayers()) {
+			if (player.name === name) {
+				return player;
+			}
+		}
+		return undefined;
 	}
 
 	/**
@@ -60,7 +74,7 @@ export class PlayerUtils {
 	/**
 	 * Sets the health of the player.
 	 * @param amount
-	 * @param player 
+	 * @param player
 	 */
 	static setHealth(player: Player, amount: number) {
 		const health = player.getComponent(EntityComponentTypes.Health);
@@ -69,7 +83,7 @@ export class PlayerUtils {
 			health.setCurrentValue(amount);
 		}
 	}
-	
+
 	/**
 	 * Gets the entity the player is riding on if it matches the given typeId.
 	 * @param typeId The rideable entity to check.
@@ -78,7 +92,7 @@ export class PlayerUtils {
 	static getRiddenEntity(player: Player): Entity | undefined {
 		return player.getComponent(EntityComponentTypes.Riding)?.entityRidingOn;
 	}
-	
+
 	/**
 	 * Checks if the player is within the given area box.
 	 * @param player
