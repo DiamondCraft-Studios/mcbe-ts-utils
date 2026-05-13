@@ -19,14 +19,18 @@ export class SystemUtils {
 	 * @param runId
 	 * @returns
 	 */
-	static clearRunSafely(runId: number | undefined | (number | undefined)[]) {
-		if (Array.isArray(runId)) {
-			for (const id of runId) {
-				this.clearRunSafely(id);
-			}
-			return;
-		}
+	static clearRunSafely(runId: number | undefined) {
 		if (runId === undefined || runId < 0 || runId > 4294967295.0) return;
 		system.clearRun(runId);
+	}
+	
+	/**
+	 * Clears the given runs safely.
+	 * @param runIds 
+	 */
+	static clearRunsSafely(...runIds: (number | undefined)[]) {
+		for (const runId of runIds) {
+			this.clearRunSafely(runId);
+		}
 	}
 }
