@@ -35,6 +35,15 @@ export class RawMessageBuilder {
  */
 export class TextUtils {
 	/**
+	 * Creates a raw message from the given string.
+	 * @param text 
+	 * @returns 
+	 */
+	static raw(text: string): RawMessage {
+		return { rawtext: [{ text: text }] };
+	}
+
+	/**
 	 * Joins the given parts into one raw message.
 	 * @param parts
 	 * @returns
@@ -44,6 +53,7 @@ export class TextUtils {
 			rawtext: parts.map((part) => (typeof part === "string" ? { text: part } : part)),
 		};
 	}
+
 	/**
 	 * Resolves the given translation key to a raw message.
 	 * @param parts
@@ -52,6 +62,7 @@ export class TextUtils {
 	static translate(key: string): RawMessage {
 		return { rawtext: [{ translate: key }] };
 	}
+
 	/**
 	 * Resolves the given formatted translation key to a raw message.
 	 * @param parts
@@ -60,6 +71,7 @@ export class TextUtils {
 	static translatef(key: string, args: RawMessage | string[]): RawMessage {
 		return { rawtext: [{ translate: key, with: args }] };
 	}
+	
 	/**
 	 * Creates a raw message with score.
 	 * @param score 
