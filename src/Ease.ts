@@ -165,6 +165,53 @@ export class Ease {
 		const fn = easeTable[easeType];
 		return fn ? fn(t) : t;
 	}
+
+	static getFunction(easeType: EaseType) {
+		return easeTable[easeType];
+	}
+
+	/**
+	 * Gets a string of the ease type usable in Minecraft commands.
+	 * e.g., /camera set \@p minecraft:free ease 1 `in_sine`
+	 * @param easeType
+	 */
+	static toCommandString(easeType: EaseType) {
+		return (
+			{
+				[EaseType.Linear]: "linear",
+				[EaseType.InQuad]: "in_quad",
+				[EaseType.OutQuad]: "out_quad",
+				[EaseType.InOutQuad]: "in_out_quad",
+				[EaseType.InCubic]: "in_cubic",
+				[EaseType.OutCubic]: "out_cubic",
+				[EaseType.InOutCubic]: "in_out_cubic",
+				[EaseType.InQuart]: "in_quart",
+				[EaseType.OutQuart]: "out_quart",
+				[EaseType.InOutQuart]: "in_out_quart",
+				[EaseType.InQuint]: "in_quint",
+				[EaseType.OutQuint]: "out_quint",
+				[EaseType.InOutQuint]: "in_out_quint",
+				[EaseType.InSine]: "in_sine",
+				[EaseType.OutSine]: "out_sine",
+				[EaseType.InOutSine]: "in_out_sine",
+				[EaseType.InExpo]: "in_expo",
+				[EaseType.OutExpo]: "out_expo",
+				[EaseType.InOutExpo]: "in_out_expo",
+				[EaseType.InCirc]: "in_circ",
+				[EaseType.OutCirc]: "out_circ",
+				[EaseType.InOutCirc]: "in_out_circ",
+				[EaseType.InBack]: "in_back",
+				[EaseType.OutBack]: "out_back",
+				[EaseType.InOutBack]: "in_out_back",
+				[EaseType.InElastic]: "in_elastic",
+				[EaseType.OutElastic]: "out_elastic",
+				[EaseType.InOutElastic]: "in_out_elastic",
+				[EaseType.InBounce]: "in_bounce",
+				[EaseType.OutBounce]: "out_bounce",
+				[EaseType.InOutBounce]: "in_out_bounce",
+			}[easeType] ?? "linear"
+		);
+	}
 }
 
 const easeTable: Record<EaseType, (v: number) => number> = {
