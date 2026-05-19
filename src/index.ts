@@ -7,6 +7,7 @@ export * from "./DynamicPropertyUtils";
 export * from "./Ease";
 export * from "./EntityUtils";
 export * from "./ItemStackUtils";
+export * from "./Logger";
 export * from "./Mathn";
 export * from "./MapUtils";
 export * from "./PlayerUtils";
