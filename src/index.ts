@@ -14,5 +14,6 @@ export * from "./PropertyUtils";
 export * from "./Random";
 export * from "./SystemUtils";
 export * from "./TextUtils";
+export * from "./TitleUtils";
 export * from "./TickTime";
 export * from "./Vector3n";
