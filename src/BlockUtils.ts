@@ -38,6 +38,15 @@ export class BlockUtils {
 	}
 
 	/**
+ 	 * Gets the block's bottom-center position.
+	 * @param block 
+	 * @returns 
+	 */
+	static getBottomCenter(block: Block): Vector3 {
+		return { ...block.center(), y: block.location.y };
+	}
+
+	/**
 	 * Gets the block beside this block given it's cardinal direction property.
 	 * @param block 
 	 * @returns 
