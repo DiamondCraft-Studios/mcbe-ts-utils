@@ -12,14 +12,16 @@ export class BlockUtils {
 		[Direction.Up, { x: 0, y: 1, z: 0 }],
 		[Direction.Down, { x: 0, y: -1, z: 0 }],
 	]);
+
 	/**
-	 * Gets the offset of the given cardinal direction.
+	 * Gets the vector offset of the given direction from the block.
 	 * @param direction 
 	 * @returns 
 	 */
 	static getDirectionOffset(direction: Direction): Vector3 {
 		return this.directionToOffset.get(direction) ?? { x: 0, y: 0, z: 0 };
 	}
+	
 	/**
 	 * Gets the location of the given block relative to the given direction.
 	 * @param block 
@@ -34,6 +36,27 @@ export class BlockUtils {
 			z: block.location.z + offset.z,
 		};
 	}
+
+	/**
+	 * Gets the block beside this block given it's cardinal direction property.
+	 * @param block 
+	 * @returns 
+	 */
+	static getBlockOnCardinal(block: Block): Block | undefined {
+		const cardinal = block.permutation.getState("minecraft:cardinal_direction");
+		if (cardinal && typeof cardinal === "string") {
+			return (
+				{
+					north: block.north(),
+					south: block.south(),
+					east: block.east(),
+					west: block.west(),
+				}[cardinal] ?? undefined
+			);
+		}
+		return undefined;
+	}
+
 	/**
 	 * Checks if the given block is within the given coordinate bounds.
 	 * @param minInclusive 
