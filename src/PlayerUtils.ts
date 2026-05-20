@@ -1,4 +1,13 @@
-import { Entity, EntityComponentTypes, EquipmentSlot, GameMode, ItemStack, Player, Vector3, world } from "@minecraft/server";
+import {
+	Entity,
+	EntityComponentTypes,
+	EquipmentSlot,
+	GameMode,
+	ItemStack,
+	Player,
+	Vector3,
+	world,
+} from "@minecraft/server";
 import { Mathn } from "./Mathn";
 
 /**
@@ -23,8 +32,8 @@ export class PlayerUtils {
 
 	/**
 	 * Gets a player by their name.
-	 * @param name 
-	 * @returns 
+	 * @param name
+	 * @returns
 	 */
 	static getByName(name: string): Player | undefined {
 		for (const player of world.getPlayers()) {
@@ -91,6 +100,26 @@ export class PlayerUtils {
 	 */
 	static getRiddenEntity(player: Player): Entity | undefined {
 		return player.getComponent(EntityComponentTypes.Riding)?.entityRidingOn;
+	}
+
+	/**
+	 * Sets the item in the player's inventory at the specified slot index.
+	 * @param player
+	 * @param slot
+	 * @param itemStack
+	 */
+	static setInventoryItem(player: Player, slot: number, itemStack: ItemStack): void {
+		player.getComponent(EntityComponentTypes.Inventory)?.container?.setItem(slot, itemStack);
+	}
+
+	/**
+	 * Adds the item to the player's inventory.
+	 * @param player
+	 * @param itemStack
+	 * @returns
+	 */
+	static addInventoryItem(player: Player, itemStack: ItemStack): void {
+		player.getComponent(EntityComponentTypes.Inventory)?.container?.addItem(itemStack);
 	}
 
 	/**
