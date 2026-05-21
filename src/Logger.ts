@@ -1,4 +1,4 @@
-import { Entity, Player, world } from "@minecraft/server";
+import { Entity, Player, PlayerPermissionLevel, world } from "@minecraft/server";
 
 import { MapUtils } from "./MapUtils";
 import { TitleUtils } from "./TitleUtils";
@@ -23,42 +23,34 @@ export class Logger {
 		return this._globalLevel;
 	}
 
-	private _debug: Logger;
-	private _info: Logger;
-	private _warn: Logger;
-	private _error: Logger;
-
-	get atDebug(): Logger {
-		return this._debug;
-	}
-
-	get atInfo(): Logger {
-		return this._info;
-	}
-
-	get atWarn(): Logger {
-		return this._warn;
-	}
-
-	get atError(): Logger {
-		return this._error;
-	}
-
 	private _logLevel: LogLevel;
 
 	get logLevel(): LogLevel {
 		return this._logLevel;
 	}
 
-	private constructor(
-		private name: string,
-		logLevel?: LogLevel
-	) {
-		this._logLevel = logLevel ?? Logger._globalLevel;
-		this._debug = new Logger(`${this.name}.debug`, LogLevel.DEBUG);
-		this._info = new Logger(`${this.name}.info`, LogLevel.INFO);
-		this._warn = new Logger(`${this.name}.warn`, LogLevel.WARN);
-		this._error = new Logger(`${this.name}.error`, LogLevel.ERROR);
+	get atDebug(): Logger {
+		this._logLevel = LogLevel.DEBUG;
+		return this;
+	}
+
+	get atInfo(): Logger {
+		this._logLevel = LogLevel.INFO;
+		return this;
+	}
+
+	get atWarn(): Logger {
+		this._logLevel = LogLevel.WARN;
+		return this;
+	}
+
+	get atError(): Logger {
+		this._logLevel = LogLevel.ERROR;
+		return this;
+	}
+
+	private constructor(private name: string) {
+		this._logLevel = Logger._globalLevel;
 	}
 
 	static setGlobalLevel(level: LogLevel) {
@@ -71,36 +63,67 @@ export class Logger {
 
 	at(level: LogLevel) {
 		return {
-			0: this._debug,
-			1: this._info,
-			2: this._warn,
-			3: this._error,
+			0: this.atDebug,
+			1: this.atInfo,
+			2: this.atWarn,
+			3: this.atError,
 			4: this,
 		}[level];
 	}
 
+	//#region Log methods
+
+	/**
+	 * Logs a normal log message to the console.
+	 * @param message
+	 * @param params
+	 */
 	log(message: any, ...params: any[]) {
 		this._log(console.log, message, ...params);
 	}
 
+	/**
+	 * Logs an info message to the console.
+	 * @param message
+	 * @param params
+	 */
 	info(message: any, ...params: any[]) {
 		this._log(console.info, message, ...params);
 	}
 
+	/**
+	 * Logs a debug message to the console.
+	 * @param message
+	 * @param params
+	 */
 	warn(message: any, ...params: any[]) {
 		this._log(console.warn, message, ...params);
 	}
 
+	/**
+	 * Logs an error message to the console.
+	 * @param message
+	 * @param params
+	 */
 	error(message: any, ...params: any[]) {
 		this._log(console.error, message, ...params);
 	}
 
-	//#region Log methods
-
+	/**
+	 * Sends a log message to the world visible to all players.
+	 * @param message
+	 * @param params
+	 */
 	toWorld(message: any, ...params: any[]) {
 		this._log(world.sendMessage, message, ...params);
 	}
 
+	/**
+	 * Logs a message to the given player.
+	 * @param player
+	 * @param message
+	 * @param params
+	 */
 	toPlayer(player: Player, message: any, ...params: any[]) {
 		this._log(
 			(message?: any, ...optionalParams: any[]) => {
@@ -112,7 +135,26 @@ export class Logger {
 	}
 
 	/**
-	 * Logs a message to the player's actionbar.
+	 * Logs a message to all operators.
+	 * @param message
+	 * @param params
+	 */
+	toOperators(message: any, ...params: any[]) {
+		this._log(
+			(message?: any, ...optionalParams: any[]) => {
+				for (const player of world.getPlayers()) {
+					if (player.playerPermissionLevel >= PlayerPermissionLevel.Operator) {
+						player.sendMessage(message);
+					}
+				}
+			},
+			message,
+			...params
+		);
+	}
+
+	/**
+	 * Logs a message to the given player's actionbar.
 	 * @param player
 	 * @param message
 	 * @param params
