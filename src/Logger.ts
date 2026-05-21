@@ -177,7 +177,7 @@ export class Logger {
 	 */
 	asEntity(entity: Entity, message: any, ...params: any[]) {
 		this._log(
-			(message?: any, ...optionalParams: any[]) => {
+			(formattedMessage?: any, ...optionalParams: any[]) => {
 				entity.runCommand(`say ${message}`);
 			},
 			message,
