@@ -1,4 +1,4 @@
-import { Player, world } from "@minecraft/server";
+import { Entity, Player, world } from "@minecraft/server";
 
 import { MapUtils } from "./MapUtils";
 import { TitleUtils } from "./TitleUtils";
@@ -14,12 +14,16 @@ export enum LogLevel {
 }
 
 export class Logger {
-	private static globalLevel: LogLevel = LogLevel.DEBUG;
+	private static _globalLevel: LogLevel = LogLevel.DEBUG;
 	private static readonly loggers: Map<string, Logger> = new Map();
 	private constructor(private name: string) {}
 
+	static get globalLevel(): LogLevel {
+		return this._globalLevel;
+	}
+
 	static setGlobalLevel(level: LogLevel) {
-		this.globalLevel = level;
+		this._globalLevel = level;
 	}
 
 	static get(name: string): Logger {
@@ -70,8 +74,26 @@ export class Logger {
 		);
 	}
 
+	/**
+	 * Logs a message on behalf of an entity using the `/say` command.
+	 * @param entity 
+	 * @param message 
+	 * @param params 
+	 */
+	asEntity(entity: Entity, message: any, ...params: any[]) {
+		this.log(
+			LogLevel.DEBUG,
+			"LOGGER",
+			(message?: any, ...optionalParams: any[]) => {
+				entity.runCommand(`say ${message}`);
+			},
+			message,
+			...params
+		);
+	}
+
 	private shouldLog(level: LogLevel): boolean {
-		return level >= Logger.globalLevel;
+		return level >= Logger._globalLevel;
 	}
 
 	private format(level: string, message: any): string {
