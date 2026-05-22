@@ -115,7 +115,13 @@ export class Logger {
 	 * @param params
 	 */
 	toWorld(message: any, ...params: any[]) {
-		this._log(world.sendMessage, message, ...params);
+		this._log(
+			(message?: any, ...optionalParams: any[]) => {
+				world.sendMessage(message);
+			},
+			message,
+			...params
+		);
 	}
 
 	/**
