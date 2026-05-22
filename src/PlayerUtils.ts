@@ -58,7 +58,7 @@ export class PlayerUtils {
 	 * @param itemStack
 	 * @param player
 	 */
-	static setItemMainhand(itemStack: ItemStack, player: Player) {
+	static setItemMainhand(itemStack: ItemStack | undefined, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Mainhand, itemStack);
 	}
 
@@ -76,7 +76,7 @@ export class PlayerUtils {
 	 * @param itemStack
 	 * @param player
 	 */
-	static setItemOffhand(itemStack: ItemStack, player: Player) {
+	static setItemOffhand(itemStack: ItemStack | undefined, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Offhand, itemStack);
 	}
 
