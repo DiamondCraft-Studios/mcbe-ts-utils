@@ -24,6 +24,20 @@ export class InventoryUtils {
 	}
 
 	/**
+	 * Gets the item stack in the given slot index of the given container or player.
+	 * @param slotIndex
+	 * @param itemStack
+	 * @param from
+	 * @returns
+	 */
+	static getItem(slotIndex: number, from: Player | Container): ItemStack | undefined {
+		const container = from instanceof Player ? this.getContainer(from) : from;
+		if (!container) return;
+
+		return container.getItem(slotIndex);
+	}
+
+	/**
 	 * Sets the item stack in the given slot index of the given container or player.
 	 * @param slotIndex
 	 * @param itemStack
