@@ -9,6 +9,8 @@ import {
 	world,
 } from "@minecraft/server";
 import { Mathn } from "./Mathn";
+import { InventoryUtils } from "./InventoryUtils";
+import { ItemStackUtils } from "./ItemStackUtils";
 
 /**
  * Player utility functions.
@@ -78,6 +80,34 @@ export class PlayerUtils {
 	 */
 	static setItemOffhand(itemStack: ItemStack | undefined, player: Player) {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(EquipmentSlot.Offhand, itemStack);
+	}
+
+	/**
+	 * Removes one count of the item in the mainhand of the player.
+	 * @param player
+	 * @returns
+	 */
+	static removeOneInMainHand(player: Player): boolean {
+		const itemStack = this.getItemMainhand(player);
+		if (!itemStack) return false;
+
+		const newItem = ItemStackUtils.removeOne(itemStack);
+		this.setItemMainhand(newItem, player);
+		return true;
+	}
+
+	/**
+	 * Removes one count of the item in the offhand of the player.
+	 * @param player
+	 * @returns
+	 */
+	static removeOneInOffHand(player: Player): boolean {
+		const itemStack = this.getItemOffhand(player);
+		if (!itemStack) return false;
+
+		const newItem = ItemStackUtils.removeOne(itemStack);
+		this.setItemOffhand(newItem, player);
+		return true;
 	}
 
 	/**
