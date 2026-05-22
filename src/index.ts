@@ -6,6 +6,7 @@ export * from "./DimensionUtils";
 export * from "./DynamicPropertyUtils";
 export * from "./Ease";
 export * from "./EntityUtils";
+export * from "./InventoryUtils";
 export * from "./ItemStackUtils";
 export * from "./Logger";
 export * from "./Mathn";
