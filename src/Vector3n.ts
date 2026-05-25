@@ -5,17 +5,17 @@ import { Vector3 } from "@minecraft/server";
  * Common functions for Vector3 with TypeScript numbers.
  */
 export class Vector3n {
-	static readonly zero: Vector3 = { x: 0, y: 0, z: 0 };
-	static readonly one: Vector3 = { x: 1, y: 1, z: 1 };
-	static readonly onehalf: Vector3 = { x: 0.5, y: 0.5, z: 0.5 };
-	static readonly up: Vector3 = { x: 0, y: 1, z: 0 };
-	static readonly down: Vector3 = { x: 0, y: -1, z: 0 };
-	static readonly left: Vector3 = { x: -1, y: 0, z: 0 };
-	static readonly right: Vector3 = { x: 1, y: 0, z: 0 };
-	static readonly forward: Vector3 = { x: 0, y: 0, z: 1 };
-	static readonly back: Vector3 = { x: 0, y: 0, z: -1 };
-	static readonly positiveInfinity: Vector3 = { x: Infinity, y: Infinity, z: Infinity };
-	static readonly negativeInfinity: Vector3 = { x: -Infinity, y: -Infinity, z: -Infinity };
+	static readonly zero: Vector3 = { x: 0, y: 0, z: 0 } as const;
+	static readonly one: Vector3 = { x: 1, y: 1, z: 1 } as const;
+	static readonly onehalf: Vector3 = { x: 0.5, y: 0.5, z: 0.5 } as const;
+	static readonly up: Vector3 = { x: 0, y: 1, z: 0 } as const;
+	static readonly down: Vector3 = { x: 0, y: -1, z: 0 } as const;
+	static readonly left: Vector3 = { x: -1, y: 0, z: 0 } as const;
+	static readonly right: Vector3 = { x: 1, y: 0, z: 0 } as const;
+	static readonly forward: Vector3 = { x: 0, y: 0, z: 1 } as const;
+	static readonly back: Vector3 = { x: 0, y: 0, z: -1 } as const;
+	static readonly positiveInfinity: Vector3 = { x: Infinity, y: Infinity, z: Infinity } as const;
+	static readonly negativeInfinity: Vector3 = { x: -Infinity, y: -Infinity, z: -Infinity } as const;
 
 	static distance(a: Vector3, b: Vector3): number {
 		const dx = a.x - b.x;
@@ -105,11 +105,11 @@ export class Vector3n {
 			z += v.z;
 		}
 
-		return { x, y, z };
+		return { x, y, z } as const;
 	}
 
 	static average(...vecs: Vector3[]): Vector3 {
-		if (vecs.length === 0) return { x: 0, y: 0, z: 0 };
+		if (vecs.length === 0) return { x: 0, y: 0, z: 0 } as const;
 		const sum = this.sum(...vecs);
 		return {
 			x: sum.x / vecs.length,
@@ -355,7 +355,7 @@ export class Vector3n {
 	}
 
 	static mins(...vecs: Vector3[]): Vector3 {
-		let result: Vector3 = { x: Infinity, y: Infinity, z: Infinity };
+		let result: Vector3 = { x: Infinity, y: Infinity, z: Infinity } as const;
 		for (const vector of vecs) {
 			result = Vector3n.min(result, vector);
 		}
@@ -371,7 +371,7 @@ export class Vector3n {
 	}
 
 	static maxs(...vectors: Vector3[]): Vector3 {
-		let result: Vector3 = { x: -Infinity, y: -Infinity, z: -Infinity };
+		let result: Vector3 = { x: -Infinity, y: -Infinity, z: -Infinity } as const;
 		for (const vector of vectors) {
 			result = Vector3n.max(result, vector);
 		}
@@ -384,7 +384,7 @@ export class Vector3n {
 
 	static fromId(id: string, delimiter = ","): Vector3 {
 		const [x, y, z] = id.split(delimiter).map(Number);
-		return { x, y, z };
+		return { x, y, z } as const;
 	}
 
 	static toString(vec: Vector3): string {
@@ -393,7 +393,7 @@ export class Vector3n {
 
 	static fromString(val: string, delimiter = " "): Vector3 {
 		const [x, y, z] = val.trim().split(delimiter).map(Number);
-		return { x, y, z };
+		return { x, y, z } as const;
 	}
 
 	/**

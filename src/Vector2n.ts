@@ -5,15 +5,15 @@ import { Vector2 } from "@minecraft/server";
  * Common functions for Vector2 with TypeScript numbers.
  */
 export class Vector2n {
-	static readonly zero: Vector2 = { x: 0, y: 0 };
-	static readonly one: Vector2 = { x: 1, y: 1 };
-	static readonly onehalf: Vector2 = { x: 0.5, y: 0.5 };
-	static readonly up: Vector2 = { x: 0, y: 1 };
-	static readonly down: Vector2 = { x: 0, y: -1 };
-	static readonly left: Vector2 = { x: -1, y: 0 };
-	static readonly right: Vector2 = { x: 1, y: 0 };
-	static readonly positiveInfinity: Vector2 = { x: Infinity, y: Infinity };
-	static readonly negativeInfinity: Vector2 = { x: -Infinity, y: -Infinity };
+	static readonly zero: Vector2 = { x: 0, y: 0 } as const;
+	static readonly one: Vector2 = { x: 1, y: 1 } as const;
+	static readonly onehalf: Vector2 = { x: 0.5, y: 0.5 } as const;
+	static readonly up: Vector2 = { x: 0, y: 1 } as const;
+	static readonly down: Vector2 = { x: 0, y: -1 } as const;
+	static readonly left: Vector2 = { x: -1, y: 0 } as const;
+	static readonly right: Vector2 = { x: 1, y: 0 } as const;
+	static readonly positiveInfinity: Vector2 = { x: Infinity, y: Infinity } as const;
+	static readonly negativeInfinity: Vector2 = { x: -Infinity, y: -Infinity } as const;
 
 	static distance(a: Vector2, b: Vector2): number {
 		const dx = a.x - b.x;
@@ -93,11 +93,11 @@ export class Vector2n {
 			y += v.y;
 		}
 
-		return { x, y };
+		return { x, y } as const;
 	}
 
 	static average(...vecs: Vector2[]): Vector2 {
-		if (vecs.length === 0) return { x: 0, y: 0 };
+		if (vecs.length === 0) return { x: 0, y: 0 } as const;
 		const sum = this.sum(...vecs);
 		return {
 			x: sum.x / vecs.length,
@@ -338,7 +338,7 @@ export class Vector2n {
 	}
 
 	static mins(...vecs: Vector2[]): Vector2 {
-		let result: Vector2 = { x: Infinity, y: Infinity };
+		let result: Vector2 = { x: Infinity, y: Infinity } as const;
 		for (const vector of vecs) {
 			result = Vector2n.min(result, vector);
 		}
@@ -353,7 +353,7 @@ export class Vector2n {
 	}
 
 	static maxs(...vectors: Vector2[]): Vector2 {
-		let result: Vector2 = { x: -Infinity, y: -Infinity };
+		let result: Vector2 = { x: -Infinity, y: -Infinity } as const;
 		for (const vector of vectors) {
 			result = Vector2n.max(result, vector);
 		}
@@ -366,7 +366,7 @@ export class Vector2n {
 
 	static fromId(id: string, delimiter = ","): Vector2 {
 		const [x, y] = id.split(delimiter).map(Number);
-		return { x, y };
+		return { x, y } as const;
 	}
 
 	static toString(vec: Vector2): string {
@@ -375,7 +375,7 @@ export class Vector2n {
 
 	static fromString(val: string, delimiter = " "): Vector2 {
 		const [x, y] = val.trim().split(delimiter).map(Number);
-		return { x, y };
+		return { x, y } as const;
 	}
 
 	/**
