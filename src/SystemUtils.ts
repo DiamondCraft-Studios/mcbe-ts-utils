@@ -21,7 +21,11 @@ export class SystemUtils {
 	 */
 	static clearRunSafely(runId: number | undefined) {
 		if (runId === undefined || runId < 0 || runId > 4294967295.0) return;
-		system.clearRun(runId);
+		try {
+			system.clearRun(runId);
+		} catch (e) {
+			console.warn(String(e));
+		}
 	}
 	
 	/**
