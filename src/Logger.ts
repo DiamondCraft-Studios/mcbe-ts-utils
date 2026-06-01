@@ -16,7 +16,7 @@ export enum LogLevel {
 const LogLevelNames: string[] = ["DEBUG", "INFO", "WARN", "ERROR", "NONE"];
 
 export class Logger {
-	private static _globalLevel: LogLevel = LogLevel.DEBUG;
+	private static _globalLevel: LogLevel = LogLevel.INFO;
 	private static readonly loggers: Map<string, Logger> = new Map();
 
 	static get globalLevel(): LogLevel {
