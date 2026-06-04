@@ -111,6 +111,15 @@ export class PlayerUtils {
 	}
 
 	/**
+	 * Gets the current health of the player.
+	 * @param player
+	 * @returns
+	 */
+	static getHealth(player: Player): number {
+		return player.getComponent(EntityComponentTypes.Health)?.currentValue ?? 0;
+	}
+
+	/**
 	 * Sets the health of the player.
 	 * @param amount
 	 * @param player
