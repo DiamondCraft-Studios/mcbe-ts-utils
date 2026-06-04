@@ -12,6 +12,7 @@ export class Random {
 	static value(): number {
 		return Math.random();
 	}
+
 	/**
 	 * Returns a random float between the given min and max.
 	 * @param minInclusive
@@ -21,6 +22,17 @@ export class Random {
 	static range(minInclusive: number, maxInclusive: number): number {
 		return Math.random() * (maxInclusive - minInclusive) + minInclusive;
 	}
+
+	/**
+	 * Returns a random integer between the given min and max.
+	 * @param minInclusive
+	 * @param maxExclusive
+	 * @returns
+	 */
+	static rangeInt(minInclusive: number, maxInclusive: number): number {
+		return Math.floor(Math.random() * (maxInclusive - minInclusive) + minInclusive);
+	}
+
 	/**
 	 * Returns a random boolean.
 	 * @returns
@@ -28,6 +40,7 @@ export class Random {
 	static boolean(): boolean {
 		return Math.random() < 0.5;
 	}
+
 	/**
 	 * Gets a random number sign.
 	 * @returns
@@ -35,6 +48,7 @@ export class Random {
 	static sign(): number {
 		return Math.random() < 0.5 ? -1 : 1;
 	}
+
 	/**
 	 * Returns a boolean with a probability of the given value.
 	 * @param probability01
@@ -43,6 +57,7 @@ export class Random {
 	static chance(probability01: number): boolean {
 		return Math.random() < probability01;
 	}
+
 	/**
 	 * Gets a random element from the given array.
 	 * @param array
@@ -52,6 +67,7 @@ export class Random {
 		if (array.length === 0) return undefined;
 		return array[Random.range(0, array.length)];
 	}
+
 	/**
 	 * Gets a random element from the given set.
 	 * @param set
@@ -68,6 +84,7 @@ export class Random {
 			if (i++ === index) return value;
 		}
 	}
+
 	/**
 	 * Gets a random color code from the Bedrock available color codes.
 	 * @returns
@@ -75,6 +92,7 @@ export class Random {
 	static colorCode(): string | undefined {
 		return Random.fromSet(ColorCodeSet);
 	}
+
 	/**
 	 * Gets a random point inside a unit circle.
 	 * @returns
@@ -88,6 +106,7 @@ export class Random {
 			y: Math.sin(angle) * radius,
 		};
 	}
+
 	/**
 	 * Gets a random point inside a unit sphere.
 	 * @returns
@@ -109,6 +128,7 @@ export class Random {
 			z: r * Math.cos(phi),
 		};
 	}
+	
 	/**
 	 * Gets a random point on the circumference of a unit circle.
 	 * @returns
@@ -121,6 +141,7 @@ export class Random {
 			y: Math.sin(angle),
 		};
 	}
+
 	/**
 	 * Gets a random point on the surface of a unit sphere.
 	 * @returns
