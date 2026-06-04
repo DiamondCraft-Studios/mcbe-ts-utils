@@ -74,6 +74,22 @@ export interface CameraPanOptions {
  */
 export class CameraUtils {
 	/**
+	 * Sets the player's camera to "minecraft:free".
+	 * @param player 
+	 */
+	static setFree(player: Player) {
+		player.camera.setCamera("minecraft:free");
+	}
+
+	/**
+	 * Clears the player's current camera preset.
+	 * @param player 
+	 */
+	static clear(player: Player) {
+		player.camera.clear();
+	}
+
+	/**
 	 * Fades the camera to the given color.
 	 * @param player
 	 * @param fadeInSeconds

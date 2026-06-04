@@ -1,5 +1,6 @@
 // src/index.ts
 export * from "./BlockUtils";
+export * from "./CameraUtils";
 export * from "./CameraShakeUtils";
 export * from "./ContainerUtils";
 export * from "./DimensionUtils";
