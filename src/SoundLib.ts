@@ -1,15 +1,16 @@
 import { Dimension, Player, PlayerSoundOptions, Vector3, WorldSoundOptions, world } from "@minecraft/server";
 
-const DEFAULT_SOUND_OPTIONS: PlaySoundOptions = {
+const DEFAULT_SOUND_OPTIONS: PlayerSoundOptions = {
 	volume: 1,
 	pitch: 1,
 };
 
 export interface PlaySoundOptions extends PlayerSoundOptions {}
 
-export interface PlayPersonalSoundOptions extends PlaySoundOptions {
+export interface PlayPersonalSoundOptions extends PlayerSoundOptions {
 	non3dSoundName: string;
 	actualSoundName: string;
+	location: Vector3;
 }
 
 /**
