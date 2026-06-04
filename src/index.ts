@@ -14,6 +14,7 @@ export * from "./MapUtils";
 export * from "./PlayerUtils";
 export * from "./PropertyUtils";
 export * from "./Random";
+export * from "./SoundLib";
 export * from "./SystemUtils";
 export * from "./TextUtils";
 export * from "./TitleUtils";
