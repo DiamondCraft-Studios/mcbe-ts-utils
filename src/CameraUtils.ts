@@ -1,5 +1,5 @@
 import { Ease, EaseType } from "./Ease";
-import { Entity, Player, Vector3 } from "@minecraft/server";
+import { Entity, Player, Vector2, Vector3 } from "@minecraft/server";
 
 import { Vector3n } from "./Vector3n";
 
@@ -69,13 +69,26 @@ export interface CameraPanOptions {
 	easeType?: EaseType;
 }
 
+export interface CameraStaticOptions {
+	pos?: Vector3;
+	rot?: Vector2;
+	/**
+	 * Entity or position to face.
+	 */
+	facing?: Entity | Vector3;
+	/**
+	 * Added to the facing position.
+	 */
+	facingOffset?: Vector3;
+}
+
 /**
  * Functions for doing simple camera animations.
  */
 export class CameraUtils {
 	/**
 	 * Sets the player's camera to "minecraft:free".
-	 * @param player 
+	 * @param player
 	 */
 	static setFree(player: Player) {
 		player.camera.setCamera("minecraft:free");
@@ -83,7 +96,7 @@ export class CameraUtils {
 
 	/**
 	 * Clears the player's current camera preset.
-	 * @param player 
+	 * @param player
 	 */
 	static clear(player: Player) {
 		player.camera.clear();
@@ -107,6 +120,35 @@ export class CameraUtils {
 			},
 			fadeColor: { red: c.x, green: c.y, blue: c.z },
 		});
+	}
+
+	/**
+	 * Sets the player's camera to "minecraft:free" with the specified position and rotation.
+	 * @param player
+	 * @param options
+	 */
+	static setStatic(player: Player, options: CameraStaticOptions) {
+		let command = `camera @s set minecraft:free`;
+
+		if (options.pos) {
+			command += ` pos ${options.pos.x} ${options.pos.y} ${options.pos.z}`;
+		}
+
+		if (options.rot && options.facing) {
+			throw new Error("Cannot specify both rot and facing in mincraft:free camera options.");
+		}
+
+		if (options.facing) {
+			let facing = options.facing instanceof Entity ? options.facing.location : options.facing;
+			if (options.facingOffset) {
+				facing = Vector3n.add(facing, options.facingOffset);
+			}
+			command += ` facing ${facing.x} ${facing.y} ${facing.z}`;
+		} else if (options.rot) {
+			command += ` rot ${options.rot.x} ${options.rot.y}`;
+		}
+
+		player.runCommand(command);
 	}
 
 	/**
