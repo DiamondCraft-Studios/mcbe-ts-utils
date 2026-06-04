@@ -216,4 +216,12 @@ export class CameraUtils {
 
 		player.runCommand(command2);
 	}
+
+	/**
+	 * Sets the player's camera to "minecraft:first_person" with default settings.
+	 * @param player 
+	 */
+	static setFirstPersonDefault(player: Player) {
+		player.camera.setCamera("minecraft:first_person");
+	}
 }
