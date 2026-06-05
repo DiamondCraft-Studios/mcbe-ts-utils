@@ -94,6 +94,20 @@ export class Random {
 	}
 
 	/**
+	 * Returns a copy of the shuffled array.
+	 * @param array
+	 * @returns
+	 */
+	static shuffle<T>(array: T[]): T[] {
+		const result = [...array];
+		for (let i = result.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[result[i], result[j]] = [result[j], result[i]];
+		}
+		return result;
+	}
+
+	/**
 	 * Gets a random point inside a unit circle.
 	 * @returns
 	 */
@@ -128,7 +142,7 @@ export class Random {
 			z: r * Math.cos(phi),
 		};
 	}
-	
+
 	/**
 	 * Gets a random point on the circumference of a unit circle.
 	 * @returns
