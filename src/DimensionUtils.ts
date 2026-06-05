@@ -68,27 +68,19 @@ export class DimensionUtils {
 	 * @param location
 	 * @param fn
 	 */
-	static async ensureChunkLoadedAsync(dimension: Dimension, location: Vector3, fn: Function) {
-		while (true) {
+	static async ensureChunkLoaded(dimension: Dimension, location: Vector3, fn: Function, tickInterval = 1, timeoutTicks = -1) {
+		let left = timeoutTicks;
+		const runId = system.runInterval(() => {
 			if (dimension.isChunkLoaded(location)) {
-				system.run(() => fn());
-				break;
+				fn();
+				system.clearRun(runId);
 			}
-		}
-	}
-
-	/**
-	 * Synchronous version of `ensureChunkLoadedAsync`.
-	 * @param dimension
-	 * @param location
-	 * @param fn
-	 */
-	static ensureChunkLoaded(dimension: Dimension, location: Vector3, fn: Function) {
-		while (true) {
-			if (dimension.isChunkLoaded(location)) {
-				system.run(() => fn());
-				break;
+			if (left === 0) {
+				system.clearRun(runId);
 			}
-		}
+			if (left > 0) {
+				left--;
+			}
+		}, tickInterval);
 	}
 }
