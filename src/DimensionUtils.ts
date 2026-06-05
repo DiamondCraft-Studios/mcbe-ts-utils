@@ -1,4 +1,4 @@
-import { Dimension, EntityQueryOptions, system, world } from "@minecraft/server";
+import { Dimension, EntityQueryOptions, world } from "@minecraft/server";
 
 /**
  * Dimension utility functions.
@@ -53,14 +53,12 @@ export class DimensionUtils {
 	 * @param commands
 	 */
 	static runCommandsIn(dimension: Dimension, ...commands: string[]) {
-		system.run(() => {
-			commands.forEach((command) => {
-				try {
-					dimension.runCommand(command);
-				} catch (e) {
-					console.error(e);
-				}
-			});
+		commands.forEach((command) => {
+			try {
+				dimension.runCommand(command);
+			} catch (e) {
+				console.error(e);
+			}
 		});
 	}
 }
