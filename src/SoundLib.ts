@@ -28,6 +28,17 @@ export class SoundLib {
 	}
 
 	/**
+	 * Plays the sound to all players.
+	 * @param soundName
+	 * @param options
+	 */
+	static playToAll(soundName: string, options: PlaySoundOptions = DEFAULT_SOUND_OPTIONS) {
+		for (const player of world.getPlayers()) {
+			player.playSound(soundName, options);
+		}
+	}
+
+	/**
 	 * Plays the sound to all players except the specified ones.
 	 * @param players
 	 * @param soundName
