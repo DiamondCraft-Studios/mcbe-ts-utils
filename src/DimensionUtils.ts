@@ -1,4 +1,4 @@
-import { Dimension, EntityQueryOptions, world } from "@minecraft/server";
+import { Dimension, EntityQueryOptions, Vector3, system, world } from "@minecraft/server";
 
 /**
  * Dimension utility functions.
@@ -60,5 +60,35 @@ export class DimensionUtils {
 				console.error(e);
 			}
 		});
+	}
+
+	/**
+	 * Ensures that the chunk is loaded before running the given function.
+	 * @param dimension
+	 * @param location
+	 * @param fn
+	 */
+	static async ensureChunkLoadedAsync(dimension: Dimension, location: Vector3, fn: Function) {
+		while (true) {
+			if (dimension.isChunkLoaded(location)) {
+				system.run(() => fn());
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Synchronous version of `ensureChunkLoadedAsync`.
+	 * @param dimension
+	 * @param location
+	 * @param fn
+	 */
+	static ensureChunkLoaded(dimension: Dimension, location: Vector3, fn: Function) {
+		while (true) {
+			if (dimension.isChunkLoaded(location)) {
+				system.run(() => fn());
+				break;
+			}
+		}
 	}
 }
