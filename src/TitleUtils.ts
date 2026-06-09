@@ -38,7 +38,7 @@ export class TitleUtils {
 	 * @param message
 	 */
 	static actionbar(player: Player, message: string) {
-		player.runCommand(`title @s actionbar ${message}`);
+		player.runCommand(`titleraw @s actionbar {"rawtext":[{"text":"${message}"}]}`);
 	}
 
 	/**
