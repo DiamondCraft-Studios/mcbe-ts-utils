@@ -102,6 +102,38 @@ export class PlayerUtils {
 		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(slot, itemStack);
 	}
 
+	static getEquipmentHead(player: Player): ItemStack | undefined {
+		return this.getEquipment(player, EquipmentSlot.Head);
+	}
+
+	static setEquipmentHead(player: Player, itemStack: ItemStack | undefined) {
+		this.setEquipment(player, EquipmentSlot.Head, itemStack);
+	}
+
+	static getEquipmentChest(player: Player): ItemStack | undefined {
+		return this.getEquipment(player, EquipmentSlot.Chest);
+	}
+
+	static setEquipmentChest(player: Player, itemStack: ItemStack | undefined) {
+		this.setEquipment(player, EquipmentSlot.Chest, itemStack);
+	}
+
+	static getEquipmentLegs(player: Player): ItemStack | undefined {
+		return this.getEquipment(player, EquipmentSlot.Legs);
+	}
+
+	static setEquipmentLegs(player: Player, itemStack: ItemStack | undefined) {
+		this.setEquipment(player, EquipmentSlot.Legs, itemStack);
+	}
+
+	static getEquipmentFeet(player: Player): ItemStack | undefined {
+		return this.getEquipment(player, EquipmentSlot.Feet);
+	}
+
+	static setEquipmentFeet(player: Player, itemStack: ItemStack | undefined) {
+		this.setEquipment(player, EquipmentSlot.Feet, itemStack);
+	}
+
 	/**
 	 * Removes one count of the item in the mainhand of the player.
 	 * @param player
