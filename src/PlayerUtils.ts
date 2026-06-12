@@ -83,6 +83,26 @@ export class PlayerUtils {
 	}
 
 	/**
+	 * Gets the item in the specified slot of the player.
+	 * @param player
+	 * @param slot
+	 * @returns
+	 */
+	static getEquipment(player: Player, slot: EquipmentSlot): ItemStack | undefined {
+		return player.getComponent(EntityComponentTypes.Equippable)?.getEquipment(slot);
+	}
+
+	/**
+	 * Sets the item in the specified slot of the player.
+	 * @param player
+	 * @param slot
+	 * @param itemStack
+	 */
+	static setEquipment(player: Player, slot: EquipmentSlot, itemStack: ItemStack | undefined) {
+		player.getComponent(EntityComponentTypes.Equippable)?.setEquipment(slot, itemStack);
+	}
+
+	/**
 	 * Removes one count of the item in the mainhand of the player.
 	 * @param player
 	 * @returns
