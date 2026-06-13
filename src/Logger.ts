@@ -182,13 +182,15 @@ export class Logger {
 	 * @param params
 	 */
 	asEntity(entity: Entity, message: any, ...params: any[]) {
-		this._log(
-			(formattedMessage?: any, ...optionalParams: any[]) => {
-				entity.runCommand(`say ${message}`);
-			},
-			message,
-			...params
-		);
+		if (entity && entity.isValid) {
+			this._log(
+				(formattedMessage?: any, ...optionalParams: any[]) => {
+					entity.runCommand(`say ${message}`);
+				},
+				message,
+				...params
+			);
+		}
 	}
 
 	//#endregion
