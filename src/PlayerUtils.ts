@@ -204,13 +204,20 @@ export class PlayerUtils {
 	}
 
 	/**
-	 * Adds the item to the player's inventory.
+	 * Adds the item to the player's inventory, but if full, drops it in the world.
 	 * @param player
 	 * @param itemStack
 	 * @returns
 	 */
 	static addInventoryItem(player: Player, itemStack: ItemStack): void {
-		player.getComponent(EntityComponentTypes.Inventory)?.container?.addItem(itemStack);
+		const container = player.getComponent(EntityComponentTypes.Inventory)?.container;
+		if (container) {
+			if (container.emptySlotsCount !== 0) {
+				container.addItem(itemStack);
+			} else {
+				player.dimension.spawnItem(itemStack, player.location);
+			}
+		}
 	}
 
 	/**
