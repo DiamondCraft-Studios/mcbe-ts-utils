@@ -20,4 +20,6 @@ export * from "./SystemUtils";
 export * from "./TextUtils";
 export * from "./TitleUtils";
 export * from "./TickTime";
+export * from "./TimeUtils";
+export * from "./UUID";
 export * from "./Vector3n";
