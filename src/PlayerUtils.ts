@@ -215,7 +215,8 @@ export class PlayerUtils {
 			if (container.emptySlotsCount !== 0) {
 				container.addItem(itemStack);
 			} else {
-				player.dimension.spawnItem(itemStack, player.location);
+				const item = player.dimension.spawnItem(itemStack, player.getHeadLocation());
+				item.applyImpulse(player.getViewDirection())
 			}
 		}
 	}
