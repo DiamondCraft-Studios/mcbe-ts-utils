@@ -11,6 +11,7 @@ import {
 import { Mathn } from "./Mathn";
 import { InventoryUtils } from "./InventoryUtils";
 import { ItemStackUtils } from "./ItemStackUtils";
+import { Vector3n } from "./Vector3n";
 
 /**
  * Player utility functions.
@@ -216,7 +217,7 @@ export class PlayerUtils {
 				container.addItem(itemStack);
 			} else {
 				const item = player.dimension.spawnItem(itemStack, player.getHeadLocation());
-				item.applyImpulse(player.getViewDirection())
+				item.applyImpulse(Vector3n.multiply(player.getViewDirection(), 0.25));
 			}
 		}
 	}
