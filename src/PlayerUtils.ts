@@ -217,7 +217,9 @@ export class PlayerUtils {
 				container.addItem(itemStack);
 			} else {
 				const item = player.dimension.spawnItem(itemStack, player.getHeadLocation());
-				item.applyImpulse(Vector3n.multiply(player.getViewDirection(), 0.25));
+				let dir = player.getViewDirection();
+				dir.y = 0;
+				item.applyImpulse(Vector3n.multiply(dir, 0.25));
 			}
 		}
 	}
