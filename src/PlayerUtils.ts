@@ -216,10 +216,11 @@ export class PlayerUtils {
 			if (container.emptySlotsCount !== 0) {
 				container.addItem(itemStack);
 			} else {
-				const item = player.dimension.spawnItem(itemStack, player.getHeadLocation());
+				let pos = player.getHeadLocation();
+				pos.y -= 0.225;
+				const item = player.dimension.spawnItem(itemStack, pos);
 				let dir = player.getViewDirection();
-				dir.y = 0;
-				item.applyImpulse(Vector3n.multiply(dir, 0.25));
+				item.applyImpulse(Vector3n.multiply(dir, 0.225));
 			}
 		}
 	}
